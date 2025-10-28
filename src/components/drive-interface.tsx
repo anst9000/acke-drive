@@ -1,33 +1,38 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "~/components/ui/button"
-import { Input } from "~/components/ui/input"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "~/components/ui/dropdown-menu"
 import {
-  Folder,
-  FileText,
-  ImageIcon,
-  Video,
-  Music,
-  File,
-  Upload,
-  Search,
-  MoreVertical,
   ChevronRight,
   Cloud,
-} from "lucide-react"
+  File,
+  FileText,
+  Folder,
+  ImageIcon,
+  MoreVertical,
+  Music,
+  Search,
+  Upload,
+  Video,
+} from "lucide-react";
+import { useState } from "react";
+import { Button } from "~/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "~/components/ui/dropdown-menu";
+import { Input } from "~/components/ui/input";
 
-type FileType = "folder" | "document" | "image" | "video" | "audio" | "file"
+type FileType = "folder" | "document" | "image" | "video" | "audio" | "file";
 
 interface DriveItem {
-  id: string
-  name: string
-  type: FileType
-  size?: string
-  modified: string
-  url?: string
-  children?: DriveItem[]
+  id: string;
+  name: string;
+  type: FileType;
+  size?: string;
+  modified: string;
+  url?: string;
+  children?: DriveItem[];
 }
 
 const mockData: DriveItem[] = [
@@ -135,72 +140,74 @@ const mockData: DriveItem[] = [
     modified: "Today",
     url: "/images/screenshot.png",
   },
-]
+];
 
 const getFileIcon = (type: FileType) => {
   switch (type) {
     case "folder":
-      return <Folder className="h-5 w-5 text-primary" />
+      return <Folder className="text-primary h-5 w-5" />;
     case "document":
-      return <FileText className="h-5 w-5 text-blue-400" />
+      return <FileText className="h-5 w-5 text-blue-400" />;
     case "image":
-      return <ImageIcon className="h-5 w-5 text-green-400" />
+      return <ImageIcon className="h-5 w-5 text-green-400" />;
     case "video":
-      return <Video className="h-5 w-5 text-purple-400" />
+      return <Video className="h-5 w-5 text-purple-400" />;
     case "audio":
-      return <Music className="h-5 w-5 text-pink-400" />
+      return <Music className="h-5 w-5 text-pink-400" />;
     default:
-      return <File className="h-5 w-5 text-muted-foreground" />
+      return <File className="text-muted-foreground h-5 w-5" />;
   }
-}
+};
 
 export function DriveInterface() {
-  const [currentPath, setCurrentPath] = useState<string[]>([])
-  const [searchQuery, setSearchQuery] = useState("")
+  const [currentPath, setCurrentPath] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const getCurrentItems = (): DriveItem[] => {
-    let items = mockData
+    let items = mockData;
     for (const folder of currentPath) {
-      const found = items.find((item) => item.name === folder)
-      if (found && found.children) {
-        items = found.children
+      const found = items.find((item) => item.name === folder);
+      if (found && found?.children) {
+        items = found.children;
       }
     }
-    return items
-  }
+    return items;
+  };
 
   const handleItemClick = (item: DriveItem) => {
     if (item.type === "folder") {
-      setCurrentPath([...currentPath, item.name])
+      setCurrentPath([...currentPath, item.name]);
     } else if (item.url) {
-      window.open(item.url, "_blank")
+      window.open(item.url, "_blank");
     }
-  }
+  };
 
   const handleBreadcrumbClick = (index: number) => {
-    setCurrentPath(currentPath.slice(0, index))
-  }
+    setCurrentPath(currentPath.slice(0, index));
+  };
 
   const handleUpload = () => {
-    alert("Upload functionality would be implemented here!")
-  }
+    alert("Upload functionality would be implemented here!");
+  };
 
-  const currentItems = getCurrentItems()
+  const currentItems = getCurrentItems();
   const filteredItems = searchQuery
-    ? currentItems.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
-    : currentItems
+    ? currentItems.filter((item) =>
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()),
+      )
+    : currentItems;
 
   return (
-    <div className="flex h-screen flex-col bg-background">
+    <div className="bg-background flex h-screen flex-col">
       {/* Header */}
-      <header className="flex items-center justify-between border-b bg-card px-4 py-3">
+      <header className="bg-card flex items-center justify-between border-b px-4 py-3">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <Cloud className="h-6 w-6 text-primary" />
+            <Cloud className="text-primary h-6 w-6" />
             <h1 className="text-xl font-semibold">Drive</h1>
           </div>
           <div className="relative w-96">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
             <Input
               type="search"
               placeholder="Search in Drive"
@@ -223,12 +230,15 @@ export function DriveInterface() {
         <div className="p-6">
           {/* Breadcrumb */}
           <div className="mb-6 flex items-center gap-2 text-sm">
-            <button onClick={() => setCurrentPath([])} className="text-muted-foreground hover:text-foreground">
+            <button
+              onClick={() => setCurrentPath([])}
+              className="text-muted-foreground hover:text-foreground"
+            >
               My Drive
             </button>
             {currentPath.map((folder, index) => (
               <div key={index} className="flex items-center gap-2">
-                <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                <ChevronRight className="text-muted-foreground h-4 w-4" />
                 <button
                   onClick={() => handleBreadcrumbClick(index + 1)}
                   className="text-muted-foreground hover:text-foreground"
@@ -241,19 +251,27 @@ export function DriveInterface() {
 
           {/* Items List */}
           {filteredItems.length === 0 ? (
-            <div className="flex h-64 items-center justify-center text-muted-foreground">No items found</div>
+            <div className="text-muted-foreground flex h-64 items-center justify-center">
+              No items found
+            </div>
           ) : (
             <div className="space-y-1">
               {filteredItems.map((item) => (
                 <div
                   key={item.id}
-                  className="group flex cursor-pointer items-center gap-4 rounded-lg border bg-card p-3 transition-all hover:bg-accent hover:shadow-sm"
+                  className="group bg-card hover:bg-accent flex cursor-pointer items-center gap-4 rounded-lg border p-3 transition-all hover:shadow-sm"
                   onClick={() => handleItemClick(item)}
                 >
                   {getFileIcon(item.type)}
-                  <div className="flex-1 truncate text-sm font-medium">{item.name}</div>
-                  <div className="text-sm text-muted-foreground">{item.modified}</div>
-                  <div className="w-24 text-right text-sm text-muted-foreground">{item.size || "—"}</div>
+                  <div className="flex-1 truncate text-sm font-medium">
+                    {item.name}
+                  </div>
+                  <div className="text-muted-foreground text-sm">
+                    {item.modified}
+                  </div>
+                  <div className="text-muted-foreground w-24 text-right text-sm">
+                    {item.size ?? "—"}
+                  </div>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button
@@ -269,7 +287,9 @@ export function DriveInterface() {
                       <DropdownMenuItem>Open</DropdownMenuItem>
                       <DropdownMenuItem>Share</DropdownMenuItem>
                       <DropdownMenuItem>Rename</DropdownMenuItem>
-                      <DropdownMenuItem className="text-destructive">Delete</DropdownMenuItem>
+                      <DropdownMenuItem className="text-destructive">
+                        Delete
+                      </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
@@ -279,5 +299,5 @@ export function DriveInterface() {
         </div>
       </main>
     </div>
-  )
+  );
 }
