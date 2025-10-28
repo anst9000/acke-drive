@@ -1,29 +1,32 @@
-# Create T3 App
+# Drive Tutorial
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+## TODO
 
-## What's next? How do I make an app with this?
+- [ ] Set up database and data model
+- [ ] Move folder open state to URL
+- [ ] Add auth
+- [ ] Add file uploading
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+<!-- - [ ] Add analytics
+- [ ] Make sure sort order is consistent
+- [ ] Add delete
+- [ ] Real homepage + onboarding
+- [ ] Fun follow ups
+- [ ] Folder deletions
+- [ ] Make sure you fetch all of the folders that have it as a parent, and their children too -->
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+<!-- ### Folder creations
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+Make a server action that takes a name and parentId, and creates a folder with that name and parentId (don't forget to set the ownerId).
 
-## Learn More
+### Access control
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+Check if user is owner before showing the folder page.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### Make a "file view" page
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+You get the idea. Maybe check out my last tutorial?
 
-## How do I deploy this?
+### Toasts!
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Gray out a row while it's being deleted -->
