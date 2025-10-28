@@ -167,9 +167,7 @@ export function DriveInterface() {
     let items = mockData;
     for (const folder of currentPath) {
       const found = items.find((item) => item.name === folder);
-      if (found && found?.children) {
-        items = found.children;
-      }
+      items = found?.children || [];
     }
     return items;
   };
