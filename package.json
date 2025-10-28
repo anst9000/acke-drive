@@ -1,6 +1,7 @@
 {
   "name": "my-v0-project",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "build": "next build",
@@ -82,6 +83,8 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "drizzle-kit": "^0.31.5",
+    "eslint": "^9.38.0",
+    "eslint-config-next": "^16.0.0",
     "postcss": "^8.5",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.1",
